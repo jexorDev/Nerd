@@ -8,20 +8,20 @@ const app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
-//var router = express.Router();
+var router = express.Router();
 
-/*
+
 router.use(function(req, res, next) {
   console.log('something happend');
   next();
 });
-*/
+
 
 app.get('/', function (req, res) {
   res.json('Hello World!')
 });
 
-/*
+
 router.route('/bears') 
   .post(function(req, res) {
     res.json({message: 'go bear'})
@@ -56,7 +56,7 @@ router.route('/bears')
 
 
 app.use('/api', router);
-*/
+
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
