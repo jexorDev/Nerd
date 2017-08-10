@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path');
 const api = require('./routes/api');
-//const DocumentDBClient = require('documentdb').DocumentClient;
+const DocumentDBClient = require('documentdb').DocumentClient;
 const collLink = `dbs/nerd-database/colls/nerd-collection`;
 
 const app = express();
