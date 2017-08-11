@@ -41,9 +41,15 @@ app.get('/', function (req, res) {
 
 router.route('/bears') 
   .post(function(req, res) {
+    console.log('attempting to connect to db');
 
     connection.connect(function(err) {
-      console.log('connected to db');
+      if (err) {
+        console.log(err);
+      }
+      else {
+        console.log('connected to db');
+      }
     });
 
     var user = { name : req.body.name };
@@ -62,7 +68,12 @@ router.route('/bears')
   .get(function(req, res) {
     
     connection.connect(function(err) {
-      // connected! (unless `err` is set)
+      if (err) {
+        console.log(err);
+      }
+      else {
+        console.log('connected to db');
+      }
     });
 
     var query = connection.query('SELECT * FROM users', function(err, result) {
