@@ -1,12 +1,20 @@
 const express = require('express')
 const path = require('path');
 const api = require('./routes/api');
-const DocumentDBClient = require('documentdb').DocumentClient;
+//const DocumentDBClient = require('documentdb').DocumentClient;
+const mysql = require('mysql');
+const bodyParser = require('body-parser');
+
 const collLink = `dbs/nerd-database/colls/nerd-collection`;
 
 const app = express();
 
 app.set('port', (process.env.PORT || 5000));
+
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
 
 var router = express.Router();
 
@@ -21,13 +29,48 @@ app.get('/', function (req, res) {
   res.json('Hello World!')
 });
 
+ var connection = mysql.createConnection({
+      host : 'dustinsegertest.caleqirppl6q.us-west-2.rds.amazonaws.com',
+      database : 'expresstestdb',
+      user : 'dustinseger',
+      password : 'eugene1204'
+    });
+
+    connection.connect(function(err) {
+      // connected! (unless `err` is set)
+    });
 
 router.route('/bears') 
   .post(function(req, res) {
-    res.json({message: 'go bear'})
+
+    var user = { name : req.body.name };
+    var query = connection.query('INSERT INTO users SET ?', user, function(err, result) {
+      if (err) {
+        throw err;
+      }
+
+      console.log(result[0]);
+    });
+
+
+    res.json({result: query.sql});
+
   })
   .get(function(req, res) {
     
+   
+
+    var query = connection.query('SELECT * FROM users', function(err, result) {
+      if (err) {
+        throw err;
+      }
+      res.json(result);
+      console.log(result);
+    });
+
+
+    
+    /*
     const docdbClient = new DocumentDBClient(
       'https://nerd-sample.documents.azure.com:443/',
       { "masterKey": 'GhP69k6RLb2A8dcEshbGbweSWIW6O0YsCUtMHmPbnAL1Cgfb0I2QhhnjVACskq3fPE93PpkTylJg1ntlHepwsQ==' });
@@ -51,6 +94,8 @@ router.route('/bears')
             console.log(docs);  
           }
         });
+    */
+
   });
   
 
