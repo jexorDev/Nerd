@@ -34,7 +34,8 @@ app.get('/', function (req, res) {
       database : 'expresstestdb',
       user : 'dustinseger',
       password : 'eugene1204', 
-      timeout : 1000
+      timeout : 1000, 
+      port : 3306
     });
 
 
