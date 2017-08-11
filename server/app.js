@@ -36,12 +36,14 @@ app.get('/', function (req, res) {
       password : 'eugene1204'
     });
 
-    connection.connect(function(err) {
-      // connected! (unless `err` is set)
-    });
+
 
 router.route('/bears') 
   .post(function(req, res) {
+
+    connection.connect(function(err) {
+      // connected! (unless `err` is set)
+    });
 
     var user = { name : req.body.name };
     var query = connection.query('INSERT INTO users SET ?', user, function(err, result) {
@@ -58,7 +60,9 @@ router.route('/bears')
   })
   .get(function(req, res) {
     
-   
+    connection.connect(function(err) {
+      // connected! (unless `err` is set)
+    });
 
     var query = connection.query('SELECT * FROM users', function(err, result) {
       if (err) {
