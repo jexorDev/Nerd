@@ -33,7 +33,8 @@ app.get('/', function (req, res) {
       host : 'dustinsegertest.caleqirppl6q.us-west-2.rds.amazonaws.com',
       database : 'expresstestdb',
       user : 'dustinseger',
-      password : 'eugene1204'
+      password : 'eugene1204', 
+      timeout : 1000
     });
 
 
@@ -42,7 +43,7 @@ router.route('/bears')
   .post(function(req, res) {
 
     connection.connect(function(err) {
-      // connected! (unless `err` is set)
+      console.log('connected to db');
     });
 
     var user = { name : req.body.name };
