@@ -12,7 +12,6 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "documentdb": "^1.12.2",
-    "express": "^4.15.4",
-    "node-mysql": "^2.14.1"
+    "express": "^4.15.4"
   }
 }
