@@ -33,7 +33,7 @@ app.get('/', function (req, res) {
       host : 'dustinsegertest.caleqirppl6q.us-west-2.rds.amazonaws.com',
       database : 'expresstestdb',
       user : 'dustinseger',
-      password : 'eugene1204', 
+      password : '', 
       timeout : 1000, 
       port : 3306
     });
